@@ -455,7 +455,7 @@
 													</li>
 													<li>
 														<a href="<?php echo esc_url( home_url( "/articles/" ) ); ?>" role="menuitem">
-															Blog
+															Bài viết và Tin tức
 														</a>
 													</li>
 												</ul>
@@ -1706,7 +1706,7 @@
 														</li>
 														<li>
 															<a href="<?php echo esc_url( home_url( "/articles/" ) ); ?>" role="menuitem">
-																Blog
+																Bài viết và Tin tức
 															</a>
 														</li>
 													</ul>

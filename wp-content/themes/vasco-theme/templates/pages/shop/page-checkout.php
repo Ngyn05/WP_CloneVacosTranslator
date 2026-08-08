@@ -122,19 +122,18 @@ get_header();
                 </div>
             </div>
 
-            <!-- Right Accordion Steps Section -->
+            <!-- Right Combined Steps Section -->
             <div class="checkout-steps-box">
-                <!-- Step 1: Personal Info & Shipping Address -->
-                <div class="checkout-step active" id="step-1" style="background: #ffffff; border-radius: 12px; border: 2px solid #5A67D8; padding: 20px 28px; margin-bottom: 20px;">
-                    <div class="step-header" style="display: flex; align-items: center; gap: 14px; cursor: pointer; border-bottom: 1px solid #E2E8F0; padding-bottom: 16px; margin-bottom: 20px;" onclick="goToStep(1)">
-                        <span style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; border: 2px solid #5A67D8; color: #5A67D8; font-weight: 700; font-size: 14px; flex-shrink: 0;" id="num-1">1</span>
-                        <h2 style="font-size: 16px; font-weight: 700; color: #5A67D8; letter-spacing: 0.5px; margin: 0; text-transform: uppercase;" id="title-1">1. THÔNG TIN & ĐỊA CHỈ GIAO HÀNG</h2>
+                <div class="checkout-step active" id="step-single" style="background: #ffffff; border-radius: 12px; border: 2px solid #5A67D8; padding: 20px 28px; margin-bottom: 20px;">
+                    <div class="step-header" style="display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #E2E8F0; padding-bottom: 16px; margin-bottom: 20px;">
+                        <span style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; border: 2px solid #5A67D8; color: #5A67D8; font-weight: 700; font-size: 14px; flex-shrink: 0;">✓</span>
+                        <h2 style="font-size: 16px; font-weight: 700; color: #5A67D8; letter-spacing: 0.5px; margin: 0; text-transform: uppercase;">THÔNG TIN & THANH TOÁN ĐƠN HÀNG</h2>
                     </div>
 
-                    <div id="step-1-body" style="display: block;">
-                        <h3 style="font-size: 16px; font-weight: 600; color: #2D3139; margin: 0 0 20px 0;">Điền thông tin nhận hàng của bạn</h3>
+                    <div id="step-single-body" style="display: block;">
+                        <form id="checkout-single-form" onsubmit="event.preventDefault(); placeOrder();">
+                            <h3 style="font-size: 15px; font-weight: 700; color: #2D3139; margin: 0 0 16px 0; text-transform: uppercase; border-bottom: 1px dashed #E2E8F0; padding-bottom: 8px;">1. Thông tin nhận hàng</h3>
 
-                        <form id="checkout-personal-form" onsubmit="event.preventDefault(); goToStep(2);">
                             <!-- Phone (Required) -->
                             <div class="checkout-form-row" style="margin-bottom: 20px;">
                                 <label for="billing_phone">Số điện thoại<span style="color: #5A67D8;">*</span></label>
@@ -142,7 +141,7 @@ get_header();
                                 <small id="billing_phone_feedback" style="display: none; margin-top: 6px; font-size: 12.5px; font-weight: 600;"></small>
                             </div>
 
-                            <!-- Email (Optional) - Đưa lên sau SĐT -->
+                            <!-- Email (Optional) -->
                             <div class="checkout-form-row" style="margin-bottom: 20px;">
                                 <label for="billing_email">Địa chỉ E-mail</label>
                                 <input type="email" id="billing_email" placeholder="Nhập email nhận hóa đơn (tùy chọn)..." />
@@ -165,60 +164,44 @@ get_header();
                                 <textarea id="order_notes" placeholder="Ghi chú về đơn hàng, chỉ dẫn địa điểm giao hàng..." rows="3" style="width: 100%; padding: 10px 14px; border: 1px solid #CBD5E0; border-radius: 6px; box-sizing: border-box; font-size: 14px; resize: vertical;"></textarea>
                             </div>
 
-                            <div style="text-align: right;">
-                                <button type="submit" style="background: #3B82F6; color: #ffffff; border: none; padding: 12px 36px; border-radius: 24px; font-weight: 700; font-size: 14px; letter-spacing: 0.5px; cursor: pointer; text-transform: uppercase; width: 100%; max-width: 220px;">TIẾP TỤC</button>
+                            <h3 style="font-size: 15px; font-weight: 700; color: #2D3139; margin: 24px 0 16px 0; text-transform: uppercase; border-bottom: 1px dashed #E2E8F0; padding-bottom: 8px;">2. Phương thức vận chuyển & Thanh toán</h3>
+
+                            <!-- Shipping Method -->
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 700; font-size: 14px; margin-bottom: 6px; color: #2D3139;">Phương thức vận chuyển</label>
+                                <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border: 1px solid #E2E8F0; background: #FAFBFD; border-radius: 8px; flex-wrap: wrap; gap: 12px;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <input type="radio" checked name="shipping_method" value="free_shipping" style="width: 18px; height: 18px; flex-shrink: 0; pointer-events: none;" />
+                                        <div>
+                                            <strong style="display: block; font-size: 14px; color: #2D3139;">Giao hàng tiêu chuẩn toàn quốc (24h - 48h)</strong>
+                                            <span style="font-size: 12px; color: #718096;">Miễn phí giao hàng tận nhà</span>
+                                        </div>
+                                    </div>
+                                    <strong style="color: #10B981; font-size: 14px;">MIỄN PHÍ</strong>
+                                </div>
                             </div>
+
+                            <!-- Payment Method -->
+                            <div style="margin-bottom: 24px;">
+                                <label style="display: block; font-weight: 700; font-size: 14px; margin-bottom: 6px; color: #2D3139;">Phương thức thanh toán</label>
+                                <div style="display: flex; flex-direction: column; gap: 12px;">
+                                    <label id="pay-cod-label" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 2px solid #3B82F6; background: #F0F5FF; border-radius: 8px; cursor: pointer;">
+                                        <input type="radio" name="payment_method" value="cod" id="pay_cod" checked style="width: 18px; height: 18px; flex-shrink: 0;" />
+                                        <div>
+                                            <strong style="display: block; font-size: 14px; color: #2D3139;">💵 Thanh toán khi nhận hàng (COD)</strong>
+                                            <span style="font-size: 12px; color: #718096;">Kiểm tra hàng và sử dụng thử trước khi đồng ý thanh toán cho shop</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="checkout-error" style="display:none; background: #FFF5F5; border: 1px solid #FC8181; color: #c53030; padding: 12px 16px; border-radius: 8px; font-size: 14px; margin-bottom: 16px;"></div>
+
+                            <button type="submit" id="place-order-btn" style="display: block; width: 100%; background: #3B82F6; color: #ffffff; border: none; padding: 16px; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;">
+                                HOÀN TẤT ĐẶT HÀNG
+                            </button>
+                            <p style="font-size: 12px; color: #718096; text-align: center; margin-top: 12px;">Thông tin của bạn được bảo mật hoàn toàn</p>
                         </form>
-                    </div>
-                </div>
-
-                <!-- Step 2: Combined Shipping & Payment Method -->
-                <div class="checkout-step" id="step-2" style="background: #ffffff; border-radius: 12px; border: 1px solid #E2E8F0; padding: 20px 28px; margin-bottom: 20px;">
-                    <div class="step-header" style="display: flex; align-items: center; gap: 14px; cursor: pointer;" onclick="goToStep(2)">
-                        <span style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; border: 2px solid #A0AEC0; color: #718096; font-weight: 700; font-size: 14px; flex-shrink: 0;" id="num-2">2</span>
-                        <h2 style="font-size: 16px; font-weight: 700; color: #718096; letter-spacing: 0.5px; margin: 0; text-transform: uppercase;" id="title-2">2. VẬN CHUYỂN & THANH TOÁN</h2>
-                    </div>
-
-                    <div id="step-2-body" style="display: none;">
-                        <!-- Shipping Method -->
-                        <h3 style="font-size: 14px; font-weight: 700; color: #2D3139; margin: 0 0 12px 0; text-transform: uppercase;">Phương thức vận chuyển</h3>
-                        <label style="display: flex; align-items: center; justify-content: space-between; padding: 16px; border: 1px solid #3B82F6; background: #F0F5FF; border-radius: 8px; margin-bottom: 24px; cursor: pointer; flex-wrap: wrap; gap: 12px;">
-                            <div style="display: flex; align-items: center; gap: 12px;">
-                                <input type="radio" checked name="shipping_method" value="free_shipping" style="width: 18px; height: 18px; flex-shrink: 0;" />
-                                <div>
-                                    <strong style="display: block; font-size: 15px; color: #2D3139;">Giao hàng tiêu chuẩn toàn quốc (24h - 48h)</strong>
-                                    <span style="font-size: 13px; color: #718096;">Miễn phí giao hàng tận nhà</span>
-                                </div>
-                            </div>
-                            <strong style="color: #10B981;">MIỄN PHÍ</strong>
-                        </label>
-
-                        <!-- Payment Method -->
-                        <h3 style="font-size: 14px; font-weight: 700; color: #2D3139; margin: 0 0 12px 0; text-transform: uppercase;">Phương thức thanh toán</h3>
-                        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
-                            <label id="pay-cod-label" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 2px solid #3B82F6; background: #F0F5FF; border-radius: 8px; cursor: pointer;">
-                                <input type="radio" name="payment_method" value="cod" id="pay_cod" checked style="width: 18px; height: 18px; flex-shrink: 0;" onchange="togglePayment()" />
-                                <div>
-                                    <strong style="display: block; font-size: 14px; color: #2D3139;">💵 Thanh toán khi nhận hàng (COD)</strong>
-                                    <span style="font-size: 12px; color: #718096;">Kiểm tra hàng trước khi thanh toán tiền mặt</span>
-                                </div>
-                            </label>
-
-                            <label id="pay-bacs-label" style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 1px solid #CBD5E0; border-radius: 8px; cursor: pointer;">
-                                <input type="radio" name="payment_method" value="bacs" id="pay_bacs" style="width: 18px; height: 18px; flex-shrink: 0;" onchange="togglePayment()" />
-                                <div>
-                                    <strong style="display: block; font-size: 14px; color: #2D3139;">🏦 Chuyển khoản ngân hàng qua mã QR</strong>
-                                    <span style="font-size: 12px; color: #718096;">Nhận mã QR chuyển khoản tự động sau khi đặt hàng</span>
-                                </div>
-                            </label>
-                        </div>
-
-                        <div id="checkout-error" style="display:none; background: #FFF5F5; border: 1px solid #FC8181; color: #c53030; padding: 12px 16px; border-radius: 8px; font-size: 14px; margin-bottom: 16px;"></div>
-
-                        <button type="button" id="place-order-btn" onclick="placeOrder()" style="display: block; width: 100%; background: #3B82F6; color: #ffffff; border: none; padding: 16px; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;">
-                            HOÀN TẤT ĐẶT HÀNG
-                        </button>
-                        <p style="font-size: 12px; color: #718096; text-align: center; margin-top: 12px;">🔒 Thông tin của bạn được bảo mật hoàn toàn</p>
                     </div>
                 </div>
             </div>
@@ -390,49 +373,11 @@ get_header();
         return true;
     };
 
-    // ── Accordion Steps ──
-    window.goToStep = function(stepNum) {
-        if (stepNum > 1) {
-            if (!window.validatePhoneInput(true)) {
-                var phoneInput = document.getElementById('billing_phone');
-                if (phoneInput) {
-                    phoneInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    phoneInput.focus();
-                }
-                return;
-            }
-        }
-        for (var i = 1; i <= 2; i++) {
-            var stepEl  = document.getElementById('step-' + i);
-            var bodyEl  = document.getElementById('step-' + i + '-body');
-            var numEl   = document.getElementById('num-' + i);
-            var titleEl = document.getElementById('title-' + i);
-            var headerEl= stepEl ? stepEl.querySelector('.step-header') : null;
+    // ── Accordion Steps (Disabled for single form, but kept as stub to prevent errors) ──
+    window.goToStep = function(stepNum) {};
 
-            if (i === stepNum) {
-                if (stepEl)   { stepEl.style.borderColor = '#5A67D8'; stepEl.style.borderWidth = '2px'; }
-                if (bodyEl)   bodyEl.style.display = 'block';
-                if (numEl)    { numEl.style.borderColor = '#5A67D8'; numEl.style.color = '#5A67D8'; }
-                if (titleEl)  titleEl.style.color = '#5A67D8';
-                if (headerEl) { headerEl.style.borderBottom = '1px solid #E2E8F0'; headerEl.style.paddingBottom = '16px'; headerEl.style.marginBottom = '20px'; }
-            } else {
-                if (stepEl)   { stepEl.style.borderColor = '#E2E8F0'; stepEl.style.borderWidth = '1px'; }
-                if (bodyEl)   bodyEl.style.display = 'none';
-                if (numEl)    { numEl.style.borderColor = '#A0AEC0'; numEl.style.color = '#718096'; }
-                if (titleEl)  titleEl.style.color = '#718096';
-                if (headerEl) { headerEl.style.borderBottom = 'none'; headerEl.style.paddingBottom = '0'; headerEl.style.marginBottom = '0'; }
-            }
-        }
-    };
-
-    // ── Toggle payment label highlight ──
-    window.togglePayment = function() {
-        var codLabel  = document.getElementById('pay-cod-label');
-        var bacsLabel = document.getElementById('pay-bacs-label');
-        var isCod     = document.getElementById('pay_cod').checked;
-        if (codLabel)  { codLabel.style.border  = isCod  ? '2px solid #3B82F6' : '1px solid #CBD5E0'; codLabel.style.background  = isCod  ? '#F0F5FF' : '#fff'; }
-        if (bacsLabel) { bacsLabel.style.border = !isCod ? '2px solid #3B82F6' : '1px solid #CBD5E0'; bacsLabel.style.background = !isCod ? '#F0F5FF' : '#fff'; }
-    };
+    // ── Toggle payment label highlight (Disabled for single payment method, kept as stub) ──
+    window.togglePayment = function() {};
 
 
 

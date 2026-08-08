@@ -334,8 +334,8 @@
 											</a>
 										</li>
 										<li>
-											<a class="footer-info" href="<?php echo esc_url( home_url( "/articles/" ) ); ?>" title="Blog">
-												Blog
+											<a class="footer-info" href="<?php echo esc_url( home_url( "/articles/" ) ); ?>" title="Bài viết và Tin tức">
+												Bài viết và Tin tức
 											</a>
 										</li>
 										<li>
